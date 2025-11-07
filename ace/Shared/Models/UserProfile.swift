@@ -23,8 +23,8 @@ struct UserProfile: Codable, Identifiable, Equatable {
         case left, right, both
     }
 
+    // coding keys for different JSON format
     enum CodingKeys: String, CodingKey {
-
         case id = "$id"
         case createdAt = "$createdAt"
         case updatedAt = "$updatedAt"
