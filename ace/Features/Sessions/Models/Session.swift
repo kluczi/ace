@@ -7,6 +7,22 @@
 
 import Foundation
 
+
+enum Intensity: String, Identifiable, CaseIterable, Codable, Equatable {
+    case low, medium, high
+    var id: Self { self }
+    
+    // intensity score for sorting etc
+    var score: Int {
+        switch self {
+            case .low: return 1
+            case .medium: return 2
+            case .high: return 3
+        }
+    }
+    
+}
+
 struct Session: Identifiable, Codable, Equatable {
     let id: String
     let userId: String
@@ -24,7 +40,7 @@ struct Session: Identifiable, Codable, Equatable {
 
 struct TrainingDetails: Codable, Equatable {
     let focusAreas: [String]
-    let intensity: Int?
+    let intensity: Intensity
     let notes: String?
 
 }
@@ -76,4 +92,6 @@ extension Session.Details: Codable {
         }
     }
 }
+
+
 
