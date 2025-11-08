@@ -7,20 +7,19 @@
 
 import Foundation
 
-
 enum Intensity: String, Identifiable, CaseIterable, Codable, Equatable {
     case low, medium, high
     var id: Self { self }
-    
+
     // intensity score for sorting etc
     var score: Int {
         switch self {
-            case .low: return 1
-            case .medium: return 2
-            case .high: return 3
+        case .low: return 1
+        case .medium: return 2
+        case .high: return 3
         }
     }
-    
+
 }
 
 struct Session: Identifiable, Codable, Equatable {
@@ -29,6 +28,7 @@ struct Session: Identifiable, Codable, Equatable {
     let date: Date
     let duration: Int?  //value in minutes
     let location: String?  //sport facility
+    let surface: String
     let details: Details
 
     enum Details: Equatable {
@@ -46,12 +46,13 @@ struct TrainingDetails: Codable, Equatable {
 }
 
 struct MatchDetails: Codable, Equatable {
-    let opponentUserId: String
+    let opponentUserId: String?
+    let opponentName: String
     let setScores: [String]
+    let result: String
     let official: Bool
     let notes: String?
 }
-
 
 extension Session.Details: Codable {
     private enum CodingKeys: String, CodingKey {
@@ -71,10 +72,16 @@ extension Session.Details: Codable {
 
         switch type {
         case .training:
-            let details = try container.decode(TrainingDetails.self, forKey: .training)
+            let details = try container.decode(
+                TrainingDetails.self,
+                forKey: .training
+            )
             self = .training(details)
         case .match:
-            let details = try container.decode(MatchDetails.self, forKey: .match)
+            let details = try container.decode(
+                MatchDetails.self,
+                forKey: .match
+            )
             self = .match(details)
         }
     }
@@ -92,6 +99,3 @@ extension Session.Details: Codable {
         }
     }
 }
-
-
-
