@@ -35,7 +35,11 @@ struct Session: Identifiable, Codable, Equatable {
         case training(TrainingDetails)
         case match(MatchDetails)
     }
-
+    
+    enum CodingKeys: String, CodingKey {
+            case id = "$id"
+            case userId, date, duration, location, surface, details
+    }
 }
 
 struct TrainingDetails: Codable, Equatable {
