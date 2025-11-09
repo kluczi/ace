@@ -10,7 +10,7 @@ import Foundation
 struct UserProfile: Codable, Identifiable, Equatable {
     let id: String
     let createdAt: Date
-    let updatedAt: Date?
+    var updatedAt: Date?
 
     var displayName: String
     var handedness: String?
