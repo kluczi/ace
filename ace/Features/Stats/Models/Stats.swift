@@ -18,5 +18,8 @@ struct Stats: Identifiable, Codable, Equatable {
     var matchesWon: Int?
     var matchesLost: Int?
     
-    
+    enum CodingKeys: String, CodingKey {
+            case id = "$id"
+            case totalMatches, hardPercentWin, grassPercentWin, clayPercentWin, overAllWin, matchesWon, matchesLost
+    }
 }
